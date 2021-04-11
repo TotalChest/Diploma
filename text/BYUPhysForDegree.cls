@@ -400,10 +400,10 @@
 	   % {\small \@GrText~\@AcadGroup\\}
 	    
 	    \textbf{\@AdvisorText:\\}
-	    {~ \@AdvisorDegree~ \\ \@Advisor\\}
+	    {\large ~ \@AdvisorDegree~ \\ \@Advisor\\}
 	    
 	    
-	    \emph{\@ConsultantText:\\}
+	    \textbf{\@ConsultantText:\\}
 	    {\large ~ \@ConsultantDegree~ \@Consultant\\}
 	    \end{flushright}
 	    \vfill
