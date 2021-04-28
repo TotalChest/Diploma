@@ -16,7 +16,8 @@ options = parser.parse_args()
 plt.figure(figsize=(15, 10))
 sns.set_palette("deep")
 
-
+plot = []
+labels = []
 for result_file in options.input: 
     app = str(result_file).split('/')[-1]
     print(app)
@@ -27,15 +28,13 @@ for result_file in options.input:
     df['time'] = df.index.map(lambda x: int(x.split('/')[-1].split('_')[-2]))
     df['strategy'] = df.index.map(lambda x: '_'.join(x.split('/')[-1].split('_')[:-2]))
 
-    plot = df[df['strategy'] == '']
-    plot = plot.groupby('time').agg(np.mean)
-    plt.plot(plot['states'], '-s', linewidth=4, markersize=12, label=app)
+    plot.append(df[(df['time'] == 12) & ((df['strategy'] == '') | (df['strategy'] == 'events_count')) ]['activities'])
+    labels.append(app)
 
-plt.legend(prop={'size': 20})
+sns.boxplot(x=labels, y=plot)
 plt.grid()
-plt.title('Зависимость метрики от времени', fontsize=40)
-plt.xlabel('Время, минуты', fontsize=30)
-plt.ylabel('Уникальные состояния', fontsize=30)
-plt.xticks(fontsize=25)
-plt.yticks(fontsize=25)
-plt.savefig('states_per_time.jpg')
+plt.title('Недетерменированность тестирования', fontsize=40)
+plt.ylabel('Уникальные Активности', fontsize=30)
+plt.xticks(fontsize=20)
+plt.yticks(fontsize=20)
+plt.savefig('activities_indeterminacy.jpg')

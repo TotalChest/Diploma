@@ -32,8 +32,9 @@ for result_file in options.input:
     labels.append(app)
 
 sns.boxplot(x=labels, y=plot)
+plt.grid()
 plt.title('Недетерменированность тестирования', fontsize=40)
-plt.ylabel('Состояния', fontsize=30)
+plt.ylabel('Уникальные состояния', fontsize=30)
 plt.xticks(fontsize=20)
-plt.yticks(fontsize=25)
-plt.savefig('indeterminacy.jpg')
+plt.yticks(fontsize=20)
+plt.savefig('states_indeterminacy.jpg')

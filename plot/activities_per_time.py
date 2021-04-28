@@ -27,14 +27,15 @@ for result_file in options.input:
     df['time'] = df.index.map(lambda x: int(x.split('/')[-1].split('_')[-2]))
     df['strategy'] = df.index.map(lambda x: '_'.join(x.split('/')[-1].split('_')[:-2]))
 
-    plot = df[(df['strategy'] == '') | (df['strategy'] == 'events_count')]
+    plot = df[df['strategy'] == '']
     plot = plot.groupby('time').agg(np.mean)
-    plt.plot(plot['activities'], linewidth=4, label=app)
+    plt.plot(plot['activities'], '-s', linewidth=4, markersize=12, label=app)
 
 plt.legend(prop={'size': 20})
+plt.grid()
 plt.title('Зависимость метрики от времени', fontsize=40)
 plt.xlabel('Время, минуты', fontsize=30)
-plt.ylabel('Активности', fontsize=30)
+plt.ylabel('Уникальные Активности', fontsize=30)
 plt.xticks(fontsize=25)
 plt.yticks(fontsize=25)
 plt.savefig('activities_per_time.jpg')
