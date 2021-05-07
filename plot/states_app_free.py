@@ -13,8 +13,9 @@ parser.add_argument('input', nargs='+', type=Path, help='Input files with statis
 options = parser.parse_args()
 
 
-plt.figure(figsize=(15, 10))
+plt.figure(figsize=(25, 10))
 sns.set_palette("deep")
+sns.set(style="ticks")
 
 concat = pd.DataFrame()
 for result_file in options.input: 
@@ -31,11 +32,15 @@ for result_file in options.input:
    
     concat = pd.concat([concat, df])
 
-sns.boxplot(x='app', y='states', hue='strategy', data=concat)
-plt.legend(prop={'size': 20})
+bp = sns.boxplot(x='app', y='states', hue='strategy', data=concat)
+bp.legend(title='Стратегия', fontsize=30, title_fontsize=30, shadow=True)
+bp.legend_.texts[0].set_text('Абстрактные состояния')
+bp.legend_.texts[1].set_text('Нейронная сеть')
+
 plt.title('Независимые от приложения стратегии', fontsize=40)
-plt.ylabel('Уникальные состояния', fontsize=30)
-plt.xlabel('', fontsize=30)
+plt.ylabel('Уникальные состояния', fontsize=35)
+plt.xlabel('Приложения', fontsize=30)
 plt.xticks(fontsize=20)
 plt.yticks(fontsize=25)
+plt.grid()
 plt.savefig('states_app_free.jpg')

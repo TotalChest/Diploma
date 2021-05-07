@@ -31,11 +31,11 @@ for result_file in options.input:
     plot = plot.groupby('time').agg(np.mean)
     plt.plot(plot['activities'], '-s', linewidth=4, markersize=12, label=app)
 
-plt.legend(prop={'size': 20})
+plt.legend(title='Приложения', fontsize=20, ncol=2, title_fontsize=25, shadow=True)
 plt.grid()
 plt.title('Зависимость метрики от времени', fontsize=40)
 plt.xlabel('Время, минуты', fontsize=30)
-plt.ylabel('Уникальные Активности', fontsize=30)
+plt.ylabel('Уникальные Активности', fontsize=35)
 plt.xticks(fontsize=25)
 plt.yticks(fontsize=25)
 plt.savefig('activities_per_time.jpg')

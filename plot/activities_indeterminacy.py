@@ -15,6 +15,7 @@ options = parser.parse_args()
 
 plt.figure(figsize=(15, 10))
 sns.set_palette("deep")
+sns.set(style="ticks")
 
 plot = []
 labels = []
@@ -32,9 +33,10 @@ for result_file in options.input:
     labels.append(app)
 
 sns.boxplot(x=labels, y=plot)
-plt.grid()
 plt.title('Недетерменированность тестирования', fontsize=40)
-plt.ylabel('Уникальные Активности', fontsize=30)
+plt.xlabel('Приложения', fontsize=30)
+plt.ylabel('Уникальные Активности', fontsize=35)
 plt.xticks(fontsize=20)
 plt.yticks(fontsize=20)
+plt.grid()
 plt.savefig('activities_indeterminacy.jpg')
