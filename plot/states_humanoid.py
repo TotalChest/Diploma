@@ -7,45 +7,23 @@ from pathlib import Path
 from matplotlib import pyplot as plt
 import matplotlib as mpl
 
-
-#parser = argparse.ArgumentParser(description='Plot statistics.')
-#parser.add_argument('input', nargs='+', type=Path, help='Input files with statistics.')
-#options = parser.parse_args()
-
-plt.figure(figsize=(15, 10))
+plt.figure(figsize=(25, 10))
 sns.set_palette("deep")
+sns.set(style="ticks")
 
-humanoid = [27, 97, 34, 51, 52, 75]
-qlearning = [68, 107, 40, 79, 53, 117]
-#concat = pd.DataFrame()
-#for result_file in options.input: 
-#    app = str(result_file).split('/')[-1]
-#    print(app)
-#    with open(result_file) as f:
-#        statistics = json.load(f)
-#
-#    df = pd.DataFrame(statistics).T
-#    df['time'] = df.index.map(lambda x: int(x.split('/')[-1].split('_')[-2]))
-#    df['strategy'] = df.index.map(lambda x: '_'.join(x.split('/')[-1].split('_')[:-2]))
-#
-#    df = df[(df['time'] == 12) & (df['strategy'].isin(['epsilon_greedy', 'humanoid']))]
-#
-#    df['compare'] = df['strategy'].map({'humanoid': #'Humanoid'}).fillna('Qlearning')
-#    df['app'] = app
-#   
-#    concat = pd.concat([concat, df])
+humanoid = [59, 27, 97, 91, 28, 34, 51, 53, 91, 76]
+qlearning = [80, 68, 107, 189, 39, 40, 79, 53, 139, 117]
 
-plt.plot(qlearning, 's:', markersize=15, label='Qlearning')
-plt.plot(humanoid, 's:', markersize=15, label='Humanoid')
+plt.plot(qlearning, 's:', markersize=18, label='Qlearning', linewidth=2)
+plt.plot(humanoid, 's:', markersize=18, label='Humanoid', linewidth=2)
 
-plt.xticks(range(6), ['APPLEBEES', 'BOOKING', 'EBAY', 'FACEAPP', 'NYTIMES', 'WSJ'])
-#sns.boxplot(x='app', y='states', hue='compare', data=concat)
-#sns.lineplot(x='app', y='states', hue='compare', data=concat)
+plt.xticks(range(10), ['ALIEXPRESS', 'APPLEBEES', 'BOOKING', 'COLORNOTE', 'DOMINOS', 'EBAY', 'FACEAPP', 'NYTIMES', 'WIKIPEDIA', 'WSJ'])
 
-plt.legend(loc=9, prop={'size': 20})
+plt.legend(loc=9, prop={'size': 25}, shadow=True)
 plt.title('Сравнение с Humanoid', fontsize=40)
-plt.ylabel('Уникальные cостояния', fontsize=30)
-plt.xlabel('', fontsize=30)
+plt.ylabel('Уникальные cocтояния', fontsize=35)
+plt.xlabel('Приложения', fontsize=30)
 plt.xticks(fontsize=20)
 plt.yticks(fontsize=25)
+plt.grid()
 plt.savefig('states_humanoid.jpg')
